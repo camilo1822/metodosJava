@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/javax.mail-api-1.4.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/mail-1.4.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/jdbc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/spring-jdbc-4.3.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/jboss-modules.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juan.arboleda/Downloads/jl1.0.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
