@@ -1,13 +1,19 @@
 package enviarMail;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferInt;
+import java.awt.image.ImageObserver;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -24,6 +30,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -35,8 +42,10 @@ public class enviar{
 		//crearArchivo();
 		//pegarDB();
 		//sonidos();
-		File file1=new File("C:\\evidencias_nequi\\Screenshot_14_3_2017 02_33_56 033.jpg");
-		File file2=new File("C:\\evidencias_nequi\\dos.jpg");
+		File file1=new File("C:\\evidencias_nequi\\dos.jpg");
+		File file2=new File("C:\\evidencias_nequi\\tres.jpg");
+		//File file1=new File("C:\\Users\\juan.arboleda\\Pictures\\81440.jpg");
+		//File file2=new File("C:\\Users\\juan.arboleda\\Pictures\\dos.png");
 		if(IsPngEquals(file1, file2)){
 			System.out.println("igual");
 		}else{
@@ -121,24 +130,55 @@ public class enviar{
 	      apl.play();     
 	}
 	
-	public static boolean IsPngEquals(File pngFile, File file) throws IOException {
-	    BufferedImage imageA = ImageIO.read(pngFile);
- 
+	public static boolean IsPngEquals(File pngFile, File file) throws IOException {	
+		String Str_Ruta_Evidencias = "C:\\evidencias_nequi\\";
+		
+		BufferedImage imageA = ImageIO.read(pngFile);
 	    BufferedImage imageB = ImageIO.read(file);
+	    //checkIdentical(imageA,imageB);
+	    System.out.println(imageA);
+	    System.out.println(imageB);
+	    
+	    BufferedImage recorte = ((BufferedImage) imageA).getSubimage(0,100,imageA.getWidth(),imageA.getHeight()-100);
+	    System.out.println(recorte);
+	    File img1 = new File("C:\\evidencias_nequi\\punto.jpg");
+	    ImageIO.write(recorte, "jpg", img1);
+	    BufferedImage recorte2 = ((BufferedImage) imageB).getSubimage(0,100,imageB.getWidth(),imageB.getHeight()-100);
+	    File img2 = new File("C:\\evidencias_nequi\\punto2.jpg");
+	    ImageIO.write(recorte2, "jpg", img2);
+	    File file1=new File("C:\\evidencias_nequi\\punto.jpg");
+		File file2=new File("C:\\evidencias_nequi\\punto2.jpg");
+		BufferedImage imageC = ImageIO.read(file1);
+	    BufferedImage imageD = ImageIO.read(file2);
  
-	    DataBufferByte dataBufferA = (DataBufferByte)imageA.getRaster().getDataBuffer();
-	    DataBufferByte dataBufferB = (DataBufferByte)imageB.getRaster().getDataBuffer();
+//	    DataBufferByte dataBufferA = (DataBufferByte)recorte.getRaster().getDataBuffer();
+//	    DataBufferByte dataBufferB = (DataBufferByte)recorte2.getRaster().getDataBuffer();
+	    DataBufferInt dataBufferA = (DataBufferInt) imageC.getRaster().getDataBuffer();
+	    DataBufferInt dataBufferB = (DataBufferInt) imageD.getRaster().getDataBuffer();
+
+	    System.out.println(dataBufferA);
+	    System.out.println(dataBufferB);
+	    System.out.println(dataBufferA.getNumBanks());
+	    System.out.println(dataBufferB.getNumBanks());
  
 	    if (dataBufferA.getNumBanks() != dataBufferB.getNumBanks()) {
+	    	System.out.println(dataBufferA.getNumBanks());
+	    	System.out.println(dataBufferB.getNumBanks());
 	        return false;
 	    }
  
 	    for (int bank = 0; bank < dataBufferA.getNumBanks(); bank++) {
+	    	System.out.println(dataBufferA.getData(bank));
+        	System.out.println(dataBufferB.getData(bank));
 	        if (!Arrays.equals(dataBufferA.getData(bank), dataBufferB.getData(bank))) {
+	        	System.out.println(dataBufferA.getData(bank));
+	        	System.out.println(dataBufferB.getData(bank));
 	            return false;
 	        }
 	    }
  
 	    return true;
 	}
+	
+
 }
