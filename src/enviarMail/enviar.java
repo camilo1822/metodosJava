@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -37,10 +39,17 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
+import javax.servlet.ServletContext;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 public class enviar{
 
@@ -60,6 +69,8 @@ public class enviar{
 			System.out.println("diferente");
 		}*/
 		enviarMailVarios();
+		//enviarPdf();
+		//quitarEsoacios();
     }
 	
 	public static void enviarMail(){
@@ -74,7 +85,8 @@ public class enviar{
 
 	            Session session = Session.getDefaultInstance(props, null);
 	            BodyPart texto = new MimeBodyPart();
-	            texto.setText("Texto del mensaje");
+	            String url="http://www.google.com";
+	            texto.setText("aqui \n "+url);
 
 	            BodyPart adjunto = new MimeBodyPart();
 	            adjunto.setDataHandler(
@@ -125,6 +137,54 @@ public class enviar{
 	            BodyPart adjunto = new MimeBodyPart();
 	            adjunto.setDataHandler(
 	                new DataHandler(new FileDataSource("C:/Users/juan.arboleda/Pictures/39268.png")));
+	            adjunto.setFileName("39268.png");
+
+	            MimeMultipart multiParte = new MimeMultipart();
+	            multiParte.addBodyPart(texto);
+	            multiParte.addBodyPart(adjunto);
+
+	            MimeMessage message = new MimeMessage(session);
+	            //message.setFrom(new InternetAddress("juan.arboleda@pragma.com.co"));
+	            Address[] destinos = new Address[destinatarios.length];
+	            for(int i=0;i<destinos.length;i++){
+	                destinos[i]=new InternetAddress(destinatarios[i]);
+	            }
+	            message.addRecipients(Message.RecipientType.TO,destinos);
+	            message.setSubject("Pruebas");
+	            message.setContent(multiParte);
+
+	            Transport t = session.getTransport("smtp");
+	            t.connect("automat.sqa@gmail.com", "Sq@2017auto");
+	            t.sendMessage(message, message.getAllRecipients());
+	            t.close();
+	        }
+	        catch (Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	}
+	
+	public static void enviarMailVariosA(String a){
+		 try
+	        {
+			 	String[] destinatarios = new String[3];
+			 	destinatarios[0]="juan.arboleda@pragma.com.co";
+			 	destinatarios[1]="juanc.arboleda@udea.edu.com";
+			 	destinatarios[2]="christian.fontalvo@sqasa.com";
+	            Properties props = new Properties();
+	            props.put("mail.smtp.host", "smtp.gmail.com");
+	            props.setProperty("mail.smtp.starttls.enable", "true");
+	            props.setProperty("mail.smtp.port", "587");
+	            props.setProperty("mail.smtp.user", "chuidiang@gmail.com");
+	            props.setProperty("mail.smtp.auth", "true");
+
+	            Session session = Session.getDefaultInstance(props, null);
+	            BodyPart texto = new MimeBodyPart();
+	            texto.setText("Texto del mensaje");
+
+	            BodyPart adjunto = new MimeBodyPart();
+	            adjunto.setDataHandler(
+	                new DataHandler(new FileDataSource(a)));
 	            adjunto.setFileName("39268.png");
 
 	            MimeMultipart multiParte = new MimeMultipart();
@@ -260,5 +320,36 @@ public class enviar{
  
 	    return true;
 	}*/
+	
+	public static void enviarPdf(){
+		try{ 
+	            System.out.println("Generating PDF...");
+	           
+	            JasperReport jasperReport = 
+	            JasperCompileManager.compileReport("C:/Users/juan.arboleda/Pictures/hellojasper.jrxml");      
+	            System.out.println("Gasd..");
+	            String titulo = "Prueba";
+	            String generado = "C:/Users/juan.arboleda/Pictures/oe.pdf";
+	            Map<String, Object> parameters = new HashMap<String, Object>();
+	            JasperPrint jasperPrint = 
+	  	            	JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+	  	                    JasperExportManager.exportReportToPdfFile(
+	  	                            jasperPrint, generado);
+	                              
+	            System.out.println("HelloJasper.pdf has been generated!");
+	            //String ao=
+	            enviarMailVariosA(generado);
+	        }
+	        catch (JRException e){
+	            e.printStackTrace();
+	        }
+	}
+	
+	public static void quitarEsoacios(){
+		String uno = " Meta Vacaciones";
+		System.out.println(uno);
+		String dos = uno.replaceAll(" ","");
+		System.out.println(dos);
+	}
 	
 }
