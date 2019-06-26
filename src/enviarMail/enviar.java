@@ -575,9 +575,10 @@ public class enviar {
 		}
 
 	}
-	
-	public static void disponibilidadBanitsmo(String banistmoMinAvailableHourParameter, String banistmoMinAvailableMinuteParameter,
-			String banistmoMaxAvailableHourParameter, String banistmoMaxAvailableMinuteParameter) {
+
+	public static void disponibilidadBanitsmo(String banistmoMinAvailableHourParameter,
+			String banistmoMinAvailableMinuteParameter, String banistmoMaxAvailableHourParameter,
+			String banistmoMaxAvailableMinuteParameter) {
 
 		Date startDate = getCurrentDateByTimeZone("America/Panama");
 
@@ -588,21 +589,15 @@ public class enviar {
 		Calendar startDateProcessed = Calendar.getInstance();
 		Calendar endDateProcessed = Calendar.getInstance();
 
-		 startDateProcessed.setTime(startDate);
-         startDateProcessed.set(Calendar.HOUR_OF_DAY,
-                 Integer.parseInt(banistmoMinAvailableHourParameter));
-         startDateProcessed.set(Calendar.MINUTE,
-                 Integer.parseInt(banistmoMinAvailableMinuteParameter));
-         startDateProcessed.set(Calendar.SECOND,
-                 0);
+		startDateProcessed.setTime(startDate);
+		startDateProcessed.set(Calendar.HOUR_OF_DAY, Integer.parseInt(banistmoMinAvailableHourParameter));
+		startDateProcessed.set(Calendar.MINUTE, Integer.parseInt(banistmoMinAvailableMinuteParameter));
+		startDateProcessed.set(Calendar.SECOND, 0);
 
-         endDateProcessed.setTime(endDate);
-         endDateProcessed.set(Calendar.HOUR_OF_DAY,
-                 Integer.parseInt(banistmoMaxAvailableHourParameter));
-         endDateProcessed.set(Calendar.MINUTE,
-                 Integer.parseInt(banistmoMaxAvailableMinuteParameter));
-         endDateProcessed.set(Calendar.SECOND,
-                 59);
+		endDateProcessed.setTime(endDate);
+		endDateProcessed.set(Calendar.HOUR_OF_DAY, Integer.parseInt(banistmoMaxAvailableHourParameter));
+		endDateProcessed.set(Calendar.MINUTE, Integer.parseInt(banistmoMaxAvailableMinuteParameter));
+		endDateProcessed.set(Calendar.SECOND, 59);
 
 		if (!(currentDate.compareTo(startDateProcessed.getTime()) >= 0
 				&& currentDate.compareTo(endDateProcessed.getTime()) <= 0)) {
