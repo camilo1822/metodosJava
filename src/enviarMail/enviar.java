@@ -337,6 +337,7 @@ public class enviar{
 			exporter.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
 			exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME,
 					"C:/Users/juan.arboleda/Downloads/documentos/oe2.xlsx");
+			exporter.exportReport();
 			//Fin excel
 	                              
 	            System.out.println("HelloJasper.pdf has been generated!");
