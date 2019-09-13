@@ -332,6 +332,12 @@ public class enviar{
 	  	            	JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 	  	                    JasperExportManager.exportReportToPdfFile(
 	  	                            jasperPrint, generado);
+			//generar excel
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME,
+					"C:/Users/juan.arboleda/Downloads/documentos/oe2.xlsx");
+			//Fin excel
 	                              
 	            System.out.println("HelloJasper.pdf has been generated!");
 	            //String ao=
