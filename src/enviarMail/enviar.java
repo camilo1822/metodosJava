@@ -482,4 +482,100 @@ public class enviar{
 //		output_file.close();
 	}
 	
+	/**
+     * Metodo con ejemplo de manejo de fechas en java 8
+     * 
+     */
+    public static void dates() {
+
+        // Para año mes y dia
+        LocalDate date = LocalDate.of(1989, 11, 11); // 1989-11-11
+        System.out.println(date.getYear()); // 1989
+        System.out.println(date.getMonth()); // NOVEMBER
+        System.out.println(date.getDayOfMonth()); // 11
+        System.out.println(date);
+        // Actual
+        LocalDate dateCurrent = LocalDate.now();
+        System.out.println("actual: " + dateCurrent);
+        System.out.println("");
+
+        // Para horas minutos segundos y nanosegundos
+        LocalTime time = LocalTime.of(5, 30, 45, 35); // 05:30:45:35
+        System.out.println(time.getHour()); // 5
+        System.out.println(time.getMinute()); // 30
+        System.out.println(time.getSecond()); // 45
+        System.out.println(time.getNano()); // 35
+        System.out.println(time);
+        // Actual
+        LocalTime timeCurrent = LocalTime.now();
+        System.out.println("actual: " + timeCurrent);
+        System.out.println("");
+
+        // Union de ambos
+        LocalDateTime dateTime = LocalDateTime.of(1989, 11, 11, 5, 30, 45, 35); // 1989-11-11T05:30:45.000000035
+        // o haciendo referencia a los dos anteriores
+        LocalDate date1 = LocalDate.of(1989, 11, 11);
+        LocalTime time1 = LocalTime.of(5, 30, 45, 35);
+        LocalDateTime dateTime1 = LocalDateTime.of(date1, time1);
+        System.out.println(dateTime);
+        System.out.println(dateTime1);
+        // Actual
+        LocalDateTime localDateTimeCurrent = LocalDateTime.now();
+        System.out.println("actual: " + localDateTimeCurrent);
+        System.out.println("");
+
+        // Diferencias entre tiempos
+        LocalTime localTime1 = LocalTime.of(12, 25);
+        LocalTime localTime2 = LocalTime.of(17, 35);
+        Duration duration = Duration.between(localTime1, localTime2);
+        System.out.println("Diferencia horas: " + duration);
+        LocalDateTime localDateTime1 = LocalDateTime.of(2016, Month.JULY, 18,
+                14, 13);
+        LocalDateTime localDateTime2 = LocalDateTime.of(2016, Month.JULY, 20,
+                12, 25);
+        Duration duration1 = Duration.between(localDateTime1, localDateTime2);
+        System.out.println("Diferencia horas: " + duration1);
+        Duration oneDayDuration = Duration.of(1, ChronoUnit.DAYS);
+        System.out.println("Diferencia un dia: " + oneDayDuration);
+        System.out.println("");
+
+        // Diferencias entre fechas
+        LocalDate localDate1 = LocalDate.of(2016, Month.JULY, 18);
+        LocalDate localDate2 = LocalDate.of(2016, Month.JULY, 20);
+        Period period = Period.between(localDate1, localDate2);
+        System.out.println("Diferencia dias " + period.getDays());
+        System.out.println("");
+
+        // Ejemplo de diferencias con ChronoUnit
+        LocalDateTime oldDate = LocalDateTime.of(1982, Month.AUGUST, 31, 10, 20,
+                55);
+        LocalDateTime newDate = LocalDateTime.of(2016, Month.NOVEMBER, 9, 10,
+                21, 56);
+
+        System.out.println(oldDate);
+        System.out.println(newDate);
+
+        // count between dates
+        long years = ChronoUnit.YEARS.between(oldDate, newDate);
+        long months = ChronoUnit.MONTHS.between(oldDate, newDate);
+        long weeks = ChronoUnit.WEEKS.between(oldDate, newDate);
+        long days = ChronoUnit.DAYS.between(oldDate, newDate);
+        long hours = ChronoUnit.HOURS.between(oldDate, newDate);
+        long minutes = ChronoUnit.MINUTES.between(oldDate, newDate);
+        long seconds = ChronoUnit.SECONDS.between(oldDate, newDate);
+        long milis = ChronoUnit.MILLIS.between(oldDate, newDate);
+        long nano = ChronoUnit.NANOS.between(oldDate, newDate);
+
+        System.out.println("\n--- Total --- ");
+        System.out.println(years + " years");
+        System.out.println(months + " months");
+        System.out.println(weeks + " weeks");
+        System.out.println(days + " days");
+        System.out.println(hours + " hours");
+        System.out.println(minutes + " minutes");
+        System.out.println(seconds + " seconds");
+        System.out.println(milis + " milis");
+        System.out.println(nano + " nano");
+    }
+	
 }
