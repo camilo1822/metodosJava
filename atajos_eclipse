@@ -1,6 +1,8 @@
 Atajos de teclado para Eclipse (y derivados como ZendStudio)
 Para editar un comando: Window → Preferences → General → Keys
 
+Importante: Alt+Shift+A	entra/sale del modo selección en bloque (permite selecciona regiones rectangulares para copiarlas y pegar tras salir del modo)
+
 Edición
 Ctrl+D	elimina la línea actual (en la que se encuentra el cursor)
 Ctrl+Shift+F	formatear código (tabulaciones, saltos de línea,…)
